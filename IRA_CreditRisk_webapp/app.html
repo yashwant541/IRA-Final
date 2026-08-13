@@ -1,0 +1,126 @@
+<!-- ================= IRA Credit Risk - HTML tab (light) ================= -->
+<div id="ira">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">IRA</div>
+      <div class="brand-txt">
+        <h1>IRA Credit Risk</h1>
+        <span>Inherent Risk Assessment workbench</span>
+      </div>
+    </div>
+    <div class="steps" id="steps">
+      <span class="step active" data-s="1">1 &middot; Details &amp; files</span>
+      <span class="step" data-s="2">2 &middot; Data checks</span>
+      <span class="step" data-s="3">3 &middot; Results &amp; approval</span>
+    </div>
+  </header>
+
+  <!-- STEP 1 -->
+  <section class="view" id="view1">
+    <div class="card">
+      <h2>Run details</h2>
+      <div class="form-row">
+        <label>Prepared by
+          <input id="f-user" class="input" placeholder="Your name / ID">
+        </label>
+        <label>Quarter
+          <select id="f-quarter" class="input">
+            <option value="Q1">Q1</option><option value="Q2">Q2</option>
+            <option value="Q3">Q3</option><option value="Q4">Q4</option>
+          </select>
+        </label>
+        <label>Year
+          <input id="f-year" class="input" type="number" min="2000" max="2100" placeholder="2026">
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Upload files</h2>
+      <p class="muted">Files are read for this run only &mdash; nothing is stored until you save.</p>
+      <div class="drop-grid">
+        <label class="drop" data-key="mi"><input type="file" accept=".xlsx,.xls" hidden>
+          <div class="drop-ico">&#128202;</div><div class="drop-title">MI file <em class="req">required</em></div>
+          <div class="drop-sub">ENR, DPD, GCO, ME, RWA&hellip;</div><div class="drop-status">Drop or click</div></label>
+        <label class="drop" data-key="other"><input type="file" accept=".xlsx,.xls" hidden>
+          <div class="drop-ico">&#128209;</div><div class="drop-title">Other tables <em class="opt">optional</em></div>
+          <div class="drop-sub">Sovereign, dispensations, breaches, PPI, interest</div><div class="drop-status">Drop or click</div></label>
+        <label class="drop" data-key="config"><input type="file" accept=".csv" hidden>
+          <div class="drop-ico">&#127758;</div><div class="drop-title">Countries config <em class="req">required</em></div>
+          <div class="drop-sub">Category, Country, Include</div><div class="drop-status">Drop or click</div></label>
+      </div>
+      <div class="actions-right">
+        <button id="btn-run" class="btn btn-primary" disabled>Run checks &amp; process</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Recent runs</h2><button id="btn-refresh" class="btn btn-ghost sm">Refresh</button></div>
+      <div id="history" class="table-wrap small"><p class="muted pad">No runs yet.</p></div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="view" id="view2" hidden>
+    <div class="card">
+      <div class="card-head"><h2>File &amp; table availability</h2><span id="run-badge" class="badge"></span></div>
+      <div id="availability" class="table-wrap small"></div>
+    </div>
+    <div class="card">
+      <h2>Values not available</h2>
+      <p class="muted">Rows the engine could not compute &mdash; usually a country/currency missing from a reference table.</p>
+      <input id="na-search" class="input" placeholder="Filter by country, product or label&hellip;">
+      <div id="na-details" class="table-wrap"></div>
+    </div>
+    <div class="actions-split">
+      <button class="btn btn-ghost" data-goto="1">&larr; Back</button>
+      <button class="btn btn-primary" data-goto="3">Continue to results &rarr;</button>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="view" id="view3" hidden>
+    <div class="card">
+      <div class="card-head">
+        <h2>Assessment output</h2>
+        <div class="selectors">
+          <select id="sel-product" class="input"></select>
+          <select id="sel-country" class="input"></select>
+        </div>
+      </div>
+      <div id="result-table" class="table-wrap"></div>
+    </div>
+
+    <div class="card override-card">
+      <h2>Final Inherent Credit Risk Assessment (with Override)</h2>
+      <p class="muted">Applies to the selected <b id="ov-scope"></b>. Saved per Product &amp; Country on approval.</p>
+      <div class="form-row">
+        <label>Override rating
+          <select id="ov-rating" class="input">
+            <option value="">— keep calculated —</option>
+            <option>Very Low</option><option>Low</option><option>Medium</option>
+            <option>High</option><option>Very High</option>
+          </select>
+        </label>
+        <label class="grow">Justification / commentary
+          <textarea id="ov-text" class="input" rows="3" placeholder="Rationale for the final assessment&hellip;"></textarea>
+        </label>
+      </div>
+      <div class="ov-hint" id="ov-saved"></div>
+    </div>
+
+    <div class="card">
+      <h2>Finalize</h2>
+      <div class="btn-row">
+        <button id="btn-save" class="btn btn-ghost">&#128190; Send output to Dataiku folder</button>
+        <button id="btn-tableau" class="btn btn-ghost">&#128228; Trigger Tableau upload</button>
+        <button id="btn-download" class="btn btn-ghost">&#8681; Download Excel</button>
+        <button id="btn-approve" class="btn btn-primary">&#10003; Approve &amp; finalize</button>
+      </div>
+      <div id="finalize-log" class="log"></div>
+    </div>
+    <div class="actions-split"><button class="btn btn-ghost" data-goto="2">&larr; Back to checks</button><span></span></div>
+  </section>
+
+  <div id="toast" class="toast" hidden></div>
+</div>

@@ -1,0 +1,107 @@
+/* ================= IRA Credit Risk - CSS tab (LIGHT) ================= */
+:root{
+  --bg:#f4f6fb; --bg2:#eef2f9; --card:#ffffff; --ink:#1f2a44; --muted:#6b7794;
+  --line:#e6ebf4; --accent:#2f6bff; --accent2:#12b3a6;
+  --grad:linear-gradient(135deg,#2f6bff,#12b3a6);
+  --shadow:0 10px 30px rgba(31,42,68,.08); --shadow-sm:0 4px 14px rgba(31,42,68,.06);
+  --r-vl:#2fbf71; --r-l:#8ccf4d; --r-m:#e7b53c; --r-h:#ef8a3c; --r-vh:#e0483e; --r-na:#9aa6bf;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+#ira{font-family:"Segoe UI",Inter,system-ui,-apple-system,sans-serif;color:var(--ink);
+  min-height:100vh;padding:20px clamp(14px,4vw,40px) 60px;
+  background:radial-gradient(900px 500px at 90% -10%,rgba(47,107,255,.08),transparent 60%),
+             linear-gradient(180deg,var(--bg),var(--bg2));}
+h1,h2{margin:0}
+h2{font-size:16px}
+.muted{color:var(--muted);font-size:12.5px}
+.pad{padding:14px}
+
+/* top bar + steps */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:22px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}
+.brand-mark{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#fff;
+  font-weight:800;background:var(--grad);box-shadow:0 8px 20px rgba(47,107,255,.3)}
+.brand-txt h1{font-size:20px}
+.brand-txt span{color:var(--muted);font-size:12.5px}
+.steps{display:flex;gap:8px;flex-wrap:wrap}
+.step{font-size:12.5px;font-weight:650;color:var(--muted);background:#fff;border:1px solid var(--line);
+  padding:8px 14px;border-radius:999px}
+.step.active{color:#fff;background:var(--grad);border-color:transparent;box-shadow:var(--shadow-sm)}
+.step.done{color:var(--accent);border-color:rgba(47,107,255,.35)}
+
+/* cards / layout */
+.view{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:18px;animation:rise .35s ease}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;box-shadow:var(--shadow)}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card h2{margin-bottom:6px}
+
+/* forms */
+.form-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.form-row label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:650;color:var(--muted)}
+.form-row label.grow{flex:1;min-width:260px}
+.input{background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:10px;
+  padding:9px 12px;font-size:13.5px;outline:none;font-family:inherit;min-width:150px}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,107,255,.12)}
+textarea.input{resize:vertical;min-width:100%}
+
+/* buttons */
+.btn{border:none;border-radius:10px;padding:10px 16px;font-weight:650;font-size:13.5px;cursor:pointer;
+  transition:.16s;color:#fff}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--grad);box-shadow:0 8px 20px rgba(47,107,255,.28)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn.sm{padding:7px 12px;font-size:12.5px}
+.actions-right{display:flex;justify-content:flex-end;margin-top:16px}
+.actions-split{display:flex;justify-content:space-between;align-items:center}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+/* drop zones */
+.drop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.drop{position:relative;background:#fbfcff;border:1.5px dashed var(--line);border-radius:var(--radius);
+  padding:22px 16px;text-align:center;cursor:pointer;transition:.18s;display:block}
+.drop:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.drop.drag{border-color:var(--accent2);background:#eafaf8}
+.drop.filled{border-style:solid;border-color:var(--r-vl);background:#f2fbf5}
+.drop-ico{font-size:26px}
+.drop-title{font-weight:700;font-size:14px;margin-top:6px}
+.drop-title em{font-style:normal;font-size:10px;padding:2px 7px;border-radius:6px;margin-left:6px}
+.req{background:#fdecea;color:#c0392b}.opt{background:#eef1f7;color:var(--muted)}
+.drop-sub{color:var(--muted);font-size:11.5px;margin:5px 0 10px}
+.drop-status{font-size:12px;color:var(--muted);font-weight:650}
+.drop.filled .drop-status{color:#1e9e57}
+
+/* badges / tables */
+.badge{font-size:12px;font-weight:650;color:var(--accent);background:rgba(47,107,255,.1);
+  padding:5px 11px;border-radius:999px}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:520px;margin-top:10px}
+.table-wrap.small{max-height:300px}
+table{border-collapse:collapse;width:100%;font-size:12.8px}
+thead th{position:sticky;top:0;background:#f2f5fb;color:#43507a;text-align:left;padding:10px 12px;
+  font-weight:700;white-space:nowrap;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 12px;border-top:1px solid var(--line);white-space:nowrap}
+tbody tr:hover{background:#f7f9fe}
+.rowfinal td{font-weight:800;border-top:2px solid rgba(47,107,255,.35);background:#f6f9ff}
+.rowoverride td{background:#fff8ec}
+.rate{padding:3px 9px;border-radius:7px;font-weight:700;font-size:11.5px;color:#fff;display:inline-block}
+.yn{font-weight:800}.yn.y{color:#1e9e57}.yn.n{color:#e0483e}
+.na{color:var(--muted)}
+
+/* override + logs */
+.override-card{border-left:3px solid var(--accent)}
+.ov-hint{font-size:12px;color:#1e9e57;margin-top:8px;min-height:16px}
+.selectors{display:flex;gap:10px}
+.log{margin-top:10px;font-size:12.5px;display:flex;flex-direction:column;gap:6px}
+.log .line{padding:8px 12px;border-radius:8px;background:#f5f7fc;border:1px solid var(--line)}
+.log .ok{background:#f0fbf4;border-color:#bfe8cd;color:#1e7a45}
+.log .err{background:#fdf1f0;border-color:#f3c9c5;color:#b23b30}
+
+/* toast */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2a44;color:#fff;
+  padding:12px 18px;border-radius:10px;font-size:13px;box-shadow:var(--shadow);z-index:50}
+
+@media(max-width:820px){.drop-grid{grid-template-columns:1fr}.selectors{flex-direction:column}}
