@@ -121,6 +121,18 @@ def load_tables(sheets: Dict[str, List[List[Any]]],
     for key in ("dispensations", "cra_breaches", "sovereign"):
         if ref.get(key):
             tables[key] = ref[key]
+
+    # --- DEDICATED dispensation (1f) pipeline: detect/read/process these
+    #     "<Category> Portfolio with Active or Expired Dispensation" tables
+    #     from the very start, independently, and let it OVERRIDE. -------------- #
+    try:
+        from . import ira_dispensations as DSP
+    except ImportError:
+        import ira_dispensations as DSP
+    disp_data, disp_report = DSP.parse(sheets)
+    tables["dispensations_report"] = disp_report
+    if disp_data:
+        tables["dispensations"] = disp_data
     if ref.get("ppi"):                 # country-keyed matrix beats currency PPI
         tables["PPI"] = ref["ppi"]
         tables["PPI_by_country"] = True

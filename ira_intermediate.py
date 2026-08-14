@@ -420,14 +420,12 @@ def _sovereign(tables, country):
 
 
 def _dispensations(tables, country, category):
-    d = tables.get("dispensations") or {}
-    tbl = d.get(category)
-    if not tbl:
-        return None, f"no dispensation table for {category}"
-    val = _lookup(tbl, country)
-    if val is None:
-        return None, _miss_reason(f"{category} dispensation table", country, tbl.keys())
-    return val, ""
+    # dedicated 1f pipeline (detect/read/process lives in ira_dispensations)
+    try:
+        from . import ira_dispensations as DSP
+    except ImportError:
+        import ira_dispensations as DSP
+    return DSP.value_for(tables.get("dispensations") or {}, category, country)
 
 
 def _breaches(tables, country, category):

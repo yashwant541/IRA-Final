@@ -231,7 +231,15 @@ def build_intermediate_frames(tables: Dict[str, Any],
                               per_cat) -> Dict[str, pd.DataFrame]:
     """The calculated intermediate tables, as tidy DataFrames for output."""
     _ensure_intermediates(tables, per_cat)
-    return I.to_frames(tables["intermediates"])
+    frames = I.to_frames(tables["intermediates"])
+    # dedicated 1f dispensation source tables (detected/read/processed), shown
+    # explicitly so you can see the raw values that feed the final output.
+    try:
+        from . import ira_dispensations as DSP
+    except ImportError:
+        import ira_dispensations as DSP
+    frames.update(DSP.intermediate_frames(tables.get("dispensations") or {}))
+    return frames
 
 
 def build_mapping() -> pd.DataFrame:
