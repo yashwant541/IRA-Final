@@ -66,15 +66,20 @@ def _title_of(row: List[Any]) -> Optional[str]:
 
 
 def _category_from(title: str) -> Optional[str]:
+    """Map a table title to a category by EXACT, case-insensitive word match.
+    The title is lowercased and de-punctuated, then split into words; a category
+    wins if any of its alias words is present.  'unsecured' is checked before
+    'secured' so the shared substring never collides.  No fuzzy matching."""
     import re
-    t = title.lower()
-    if re.search(r"\bunsecured\b", t):
+    words = set(re.sub(r"[^a-z0-9 ]", " ", str(title).lower()).split())
+
+    if words & {"unsecured", "unsec"}:
         return "Unsecured"
-    if re.search(r"\bsecured\b", t):
+    if words & {"secured", "sec"}:
         return "Secured"
-    if "sme" in t or "business" in t:
+    if words & {"sme", "smb", "business"}:
         return "SME Banking"
-    if "wealth" in t or re.search(r"\bwl\b", t):     # "WL Portfolio" = Wealth Lending
+    if words & {"wl", "wm", "wealth"}:
         return "Wealth Lending"
     return None
 
